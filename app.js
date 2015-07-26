@@ -1,10 +1,10 @@
-var express = require('express');
 var mongoose = require('mongoose');
-var mess = require('mess');
+var messa = require('messa');
 
 require('./models');
 
-var app = express();
-app.use('/', mess(mongoose));
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/messa-demo');
 
-module.exports = app;
+messa(mongoose, {
+  title: 'demo app for messa (github.com/simoneb/messa)'
+}).listen(process.env.PORT || 3000);
